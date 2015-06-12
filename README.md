@@ -1,2 +1,3 @@
 # react-twitter
-react, twitter, express, socket-io and es6
+react(without flux), twitter, express, socket-io and es6
+
