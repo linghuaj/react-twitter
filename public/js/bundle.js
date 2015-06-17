@@ -172,7 +172,7 @@ module.exports = TweetsApp = React.createClass({displayName: 'TweetsApp',
 
     // Get current application state
     var updated = this.state.tweets;
-
+    console.log(">< updated === this.state.tweets",updated === this.state.tweets)
     // Mark our tweets active
     updated.forEach(function(tweet){
       tweet.active = true;
@@ -190,11 +190,6 @@ module.exports = TweetsApp = React.createClass({displayName: 'TweetsApp',
     var h = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
     var s = document.body.scrollTop;
     var scrolled = (h + s) > document.body.offsetHeight -100;
-
-    // console.log(">< in check checkWindowScroll")
-    // console.log(">< scrolled", scrolled)
-    // console.log(">< this.state.paging", this.state.paging)
-    // console.log("><this.state.done", this.state.done)
 
     // If scrolled enough, not currently paging and not complete...
     if(scrolled && !this.state.paging && !this.state.done) {
@@ -275,12 +270,14 @@ module.exports = TweetsApp = React.createClass({displayName: 'TweetsApp',
     return (
       React.DOM.div({className: "tweets-app"}, 
         Tweets({tweets: this.state.tweets}), 
+        Loader({paging: this.state.paging}), 
         NotificationBar({count: this.state.count, onShowNewTweets: this.showNewTweets})
       )
     )
   }
 
 });
+
 },{"./Loader.react.js":"/Users/ljin/code/react/react-twitter/components/Loader.react.js","./NotificationBar.react.js":"/Users/ljin/code/react/react-twitter/components/NotificationBar.react.js","./Tweets.react.js":"/Users/ljin/code/react/react-twitter/components/Tweets.react.js","react":"/Users/ljin/code/react/react-twitter/node_modules/react/react.js"}],"/Users/ljin/code/react/react-twitter/node_modules/react/lib/AutoFocusMixin.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014 Facebook, Inc.

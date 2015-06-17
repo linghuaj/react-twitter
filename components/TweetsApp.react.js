@@ -76,7 +76,7 @@ module.exports = TweetsApp = React.createClass({
 
     // Get current application state
     var updated = this.state.tweets;
-
+    console.log(">< updated === this.state.tweets",updated === this.state.tweets)
     // Mark our tweets active
     updated.forEach(function(tweet){
       tweet.active = true;
@@ -94,11 +94,6 @@ module.exports = TweetsApp = React.createClass({
     var h = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
     var s = document.body.scrollTop;
     var scrolled = (h + s) > document.body.offsetHeight -100;
-
-    // console.log(">< in check checkWindowScroll")
-    // console.log(">< scrolled", scrolled)
-    // console.log(">< this.state.paging", this.state.paging)
-    // console.log("><this.state.done", this.state.done)
 
     // If scrolled enough, not currently paging and not complete...
     if(scrolled && !this.state.paging && !this.state.done) {
@@ -179,6 +174,7 @@ module.exports = TweetsApp = React.createClass({
     return (
       <div className="tweets-app">
         <Tweets tweets={this.state.tweets} />
+        <Loader paging={this.state.paging}/>
         <NotificationBar count={this.state.count} onShowNewTweets={this.showNewTweets}/>
       </div>
     )
