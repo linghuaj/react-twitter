@@ -1,5 +1,8 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({"/Users/ljin/code/react/react-twitter/app.js":[function(require,module,exports){
 /** @jsx React.DOM */
+// Because we are working with a file that will be bundled with Browserify
+// and will have access to JSX transforms, we can use JSX syntax when passing
+// our component as an argument.
 
 var React = require('react');
 var TweetsApp = require('./components/TweetsApp.react');
@@ -7,15 +10,13 @@ var TweetsApp = require('./components/TweetsApp.react');
 // Snag the initial state that was passed from the server side
 var initialState = JSON.parse(document.getElementById('initial-state').innerHTML);
 
-// Render the components, picking up where react left off on the server
-
-// Because we are working with a file that will be bundled with Browserify
-// and will have access to JSX transforms, we can use JSX syntax when passing
-// our component as an argument.
+// when using Browserify, we need a client side entry point to pick up the state we just saved, and mount our application component
+// it will only performs the mount part, because server already rendered, the virtual dom will prevent it from another dom re-fresh
 React.renderComponent(
   TweetsApp({tweets: initialState}),
   document.getElementById('react-app')
 )
+
 },{"./components/TweetsApp.react":"/Users/ljin/code/react/react-twitter/components/TweetsApp.react.js","react":"/Users/ljin/code/react/react-twitter/node_modules/react/react.js"}],"/Users/ljin/code/react/react-twitter/components/Loader.react.js":[function(require,module,exports){
 /** @jsx React.DOM */
 
@@ -103,8 +104,8 @@ var NotificationBar = require('./NotificationBar.react.js');
 
 // Export the TweetsApp component
 module.exports = TweetsApp = React.createClass({displayName: 'TweetsApp',
-    // Set the initial component state
-    // getInitialState method is only called before the first mount of our component
+  // Set the initial component state
+  // getInitialState method is only called before the first mount of our component
   getInitialState: function(props){
 
     props = props || this.props;
@@ -114,12 +115,13 @@ module.exports = TweetsApp = React.createClass({displayName: 'TweetsApp',
       tweets: props.tweets,
       count: 0,
       page: 0,
-      paging: false,
+      paging: false,//is it in paging? if so show the loader
       skip: 0,
       done: false
     };
 
   },
+
   // we need to use the componentWillReceiveProps method to make sure that if we mount our component
   // again, that it will receive the state
   componentWillReceiveProps: function(newProps, oldProps){
@@ -138,8 +140,8 @@ module.exports = TweetsApp = React.createClass({displayName: 'TweetsApp',
     // On tweet event emission...
     socket.on('tweet', function (data) {
 
-        // Add a tweet to our queue
-        self.addTweet(data);
+      // Add a tweet to our queue
+      self.addTweet(data);
 
     });
 
@@ -149,6 +151,7 @@ module.exports = TweetsApp = React.createClass({displayName: 'TweetsApp',
   },
 
   // Method to add a tweet to our timeline
+  //when receive a new tweet from socket.io, set a new state
   addTweet: function(tweet){
 
     // Get current application state
@@ -167,12 +170,14 @@ module.exports = TweetsApp = React.createClass({displayName: 'TweetsApp',
     this.setState({tweets: updated, count: count, skip: skip});
 
   },
+
   // Method to show the unread tweets
+  // triggered from clicking on the notification bar
+  // passed to notificationbar as props function
   showNewTweets: function(){
 
     // Get current application state
     var updated = this.state.tweets;
-    console.log(">< updated === this.state.tweets",updated === this.state.tweets)
     // Mark our tweets active
     updated.forEach(function(tweet){
       tweet.active = true;
@@ -196,7 +201,6 @@ module.exports = TweetsApp = React.createClass({displayName: 'TweetsApp',
 
       // Set application state (Paging, Increment page)
       this.setState({paging: true, page: this.state.page + 1});
-      // console.log(">< to call get page")
 
       // Get the next page of tweets from the server
       this.getPage(this.state.page);

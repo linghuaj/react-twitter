@@ -7,8 +7,8 @@ var NotificationBar = require('./NotificationBar.react.js');
 
 // Export the TweetsApp component
 module.exports = TweetsApp = React.createClass({
-    // Set the initial component state
-    // getInitialState method is only called before the first mount of our component
+  // Set the initial component state
+  // getInitialState method is only called before the first mount of our component
   getInitialState: function(props){
 
     props = props || this.props;
@@ -18,12 +18,13 @@ module.exports = TweetsApp = React.createClass({
       tweets: props.tweets,
       count: 0,
       page: 0,
-      paging: false,
+      paging: false,//is it in paging? if so show the loader
       skip: 0,
       done: false
     };
 
   },
+
   // we need to use the componentWillReceiveProps method to make sure that if we mount our component
   // again, that it will receive the state
   componentWillReceiveProps: function(newProps, oldProps){
@@ -42,8 +43,8 @@ module.exports = TweetsApp = React.createClass({
     // On tweet event emission...
     socket.on('tweet', function (data) {
 
-        // Add a tweet to our queue
-        self.addTweet(data);
+      // Add a tweet to our queue
+      self.addTweet(data);
 
     });
 
@@ -53,6 +54,7 @@ module.exports = TweetsApp = React.createClass({
   },
 
   // Method to add a tweet to our timeline
+  //when receive a new tweet from socket.io, set a new state
   addTweet: function(tweet){
 
     // Get current application state
@@ -71,12 +73,14 @@ module.exports = TweetsApp = React.createClass({
     this.setState({tweets: updated, count: count, skip: skip});
 
   },
+
   // Method to show the unread tweets
+  // triggered from clicking on the notification bar
+  // passed to notificationbar as props function
   showNewTweets: function(){
 
     // Get current application state
     var updated = this.state.tweets;
-    console.log(">< updated === this.state.tweets",updated === this.state.tweets)
     // Mark our tweets active
     updated.forEach(function(tweet){
       tweet.active = true;
@@ -100,7 +104,6 @@ module.exports = TweetsApp = React.createClass({
 
       // Set application state (Paging, Increment page)
       this.setState({paging: true, page: this.state.page + 1});
-      // console.log(">< to call get page")
 
       // Get the next page of tweets from the server
       this.getPage(this.state.page);
