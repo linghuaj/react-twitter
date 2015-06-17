@@ -1,3 +1,5 @@
+//DO NOT COPY THIS, >< thanks!
+
 module.exports = {
   twitter: {
     consumer_key: 'FE8XwYAu7lKcbCRcJ9Ez4zyPo',
