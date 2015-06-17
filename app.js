@@ -1,10 +1,9 @@
-/** @jsx React.DOM */
 // Because we are working with a file that will be bundled with Browserify
 // and will have access to JSX transforms, we can use JSX syntax when passing
 // our component as an argument.
 
 var React = require('react');
-var TweetsApp = require('./components/TweetsApp.react');
+var TweetsApp = require('./components/TweetsApp.react.jsx');
 
 // Snag the initial state that was passed from the server side
 var initialState = JSON.parse(document.getElementById('initial-state').innerHTML);

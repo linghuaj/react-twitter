@@ -1,9 +1,9 @@
 'use strict'
-//Notice that we are using non-JSX syntax when defining the component we want to render. 
+//Notice that we are using non-JSX syntax when defining the component we want to render.
 //This is because we are in our routes file and it is not being transformed.
-let JSX = require('node-jsx').install() //important
+// let JSX = require('node-jsx').install() //important
 let React = require('react')
-let TweetsApp = require('./components/TweetsApp.react')
+let TweetsApp = require('./components/TweetsApp.react.jsx')
 let Tweet = require('./models/Tweet')
 let then = require('express-then')
 
