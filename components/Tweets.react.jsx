@@ -1,15 +1,11 @@
-let React = require('react');
-let Tweet = require('./Tweet.react.jsx');
+let React = require('react')
+let Tweet = require('./Tweet.react.jsx')
 
 class Tweets extends React.Component {
-  constructor(props) {
-    super(props)
-  }
 
   render() {
-
         // Build list items of single tweet components using map
-        var content = this.props.tweets.map(function(tweet){
+        let content = this.props.tweets.map((tweet) => {
           return (
             <Tweet key={tweet._id} tweet={tweet} />
           )

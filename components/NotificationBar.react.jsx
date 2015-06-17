@@ -1,10 +1,6 @@
 let React = require('react');
 
 class NotificationBar extends React.Component {
-  constructor(props) {
-    super(props)
-  }
-
   render() {
     let count = this.props.count;
     return (
@@ -14,3 +10,5 @@ class NotificationBar extends React.Component {
     )
    }
 }
+
+module.exports = NotificationBar

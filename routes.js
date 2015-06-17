@@ -13,10 +13,10 @@ require('songbird')
 module.exports = (app) => {
     app.get('/', then(async(req, res) => {
         let tweets = await Tweet.promise.getTweets(0, 0)
-        let markup = React.renderComponentToString(
-            TweetsApp({
-                tweets: tweets
-            })
+        console.log(">< TweetsApp", TweetsApp)
+        let element = React.createElement(TweetsApp,{tweets: tweets})
+        let markup = React.renderToString(
+          element
         )
 
         // Render our 'home' template

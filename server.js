@@ -46,8 +46,8 @@
  let twit = new twitter(config.twitter)
 
  // Set a stream listener for tweets matching tracking keywords
- // twit.stream('statuses/filter', {
- //     track: '#reactjs, BarackObama'
- // }, (stream) => {
- //     streamHandler(stream, io)
- // });
+ twit.stream('statuses/filter', {
+     track: '#reactjs, BarackObama'
+ }, (stream) => {
+     streamHandler(stream, io)
+ })

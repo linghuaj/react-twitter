@@ -13,458 +13,398 @@ var initialState = JSON.parse(document.getElementById('initial-state').innerHTML
 
 // when using Browserify, we need a client side entry point to pick up the state we just saved, and mount our application component
 // it will only performs the mount part, because server already rendered, the virtual dom will prevent it from another dom re-fresh
-React.renderComponent(React.createElement(TweetsApp, { tweets: initialState }), document.getElementById('react-app'));
+React.render(React.createElement(TweetsApp, { tweets: initialState }), document.getElementById('react-app'));
 
 },{"./components/TweetsApp.react.jsx":"/Users/ljin/code/react/react-twitter/components/TweetsApp.react.jsx","react":"/Users/ljin/code/react/react-twitter/node_modules/react/react.js"}],"/Users/ljin/code/react/react-twitter/components/Loader.react.jsx":[function(require,module,exports){
-/** @jsx React.DOM */let React = require('react');
+"use strict";
 
-class Loader extends React.Component {
-  constructor(props) {
-    super(props)
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; }
+
+var React = require("react");
+
+var Loader = (function (_React$Component) {
+  function Loader() {
+    _classCallCheck(this, Loader);
+
+    if (_React$Component != null) {
+      _React$Component.apply(this, arguments);
+    }
   }
 
-  render() {
-    return (
-      React.DOM.div({className: "loader " + (this.props.paging ? "active" : "")}, 
-        React.DOM.img({src: "svg/loader.svg"})
-      )
-    )
-   }
-}
+  _inherits(Loader, _React$Component);
 
-module.exports = Loader
+  _createClass(Loader, [{
+    key: "render",
+    value: function render() {
+      return React.createElement(
+        "div",
+        { className: "loader " + (this.props.paging ? "active" : "") },
+        React.createElement("img", { src: "svg/loader.svg" })
+      );
+    }
+  }]);
+
+  return Loader;
+})(React.Component);
+
+module.exports = Loader;
 
 },{"react":"/Users/ljin/code/react/react-twitter/node_modules/react/react.js"}],"/Users/ljin/code/react/react-twitter/components/NotificationBar.react.jsx":[function(require,module,exports){
-/** @jsx React.DOM */let React = require('react');
+'use strict';
 
-class NotificationBar extends React.Component {
-  constructor(props) {
-    super(props)
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; }
+
+var React = require('react');
+
+var NotificationBar = (function (_React$Component) {
+  function NotificationBar() {
+    _classCallCheck(this, NotificationBar);
+
+    if (_React$Component != null) {
+      _React$Component.apply(this, arguments);
+    }
   }
 
-  render() {
-    let count = this.props.count;
-    return (
-      React.DOM.div({className: "notification-bar" + (count > 0 ? ' active' : '')}, 
-        React.DOM.p(null, "There are ", count, " new tweets! ", React.DOM.a({href: "#top", onClick: this.props.onShowNewTweets}, "Click here to see them."))
-      )
-    )
-   }
-}
+  _inherits(NotificationBar, _React$Component);
+
+  _createClass(NotificationBar, [{
+    key: 'render',
+    value: function render() {
+      var count = this.props.count;
+      return React.createElement(
+        'div',
+        { className: 'notification-bar' + (count > 0 ? ' active' : '') },
+        React.createElement(
+          'p',
+          null,
+          'There are ',
+          count,
+          ' new tweets! ',
+          React.createElement(
+            'a',
+            { href: '#top', onClick: this.props.onShowNewTweets },
+            'Click here to see them.'
+          )
+        )
+      );
+    }
+  }]);
+
+  return NotificationBar;
+})(React.Component);
+
+module.exports = NotificationBar;
 
 },{"react":"/Users/ljin/code/react/react-twitter/node_modules/react/react.js"}],"/Users/ljin/code/react/react-twitter/components/Tweet.react.jsx":[function(require,module,exports){
-/** @jsx React.DOM */let React = require('react');
+'use strict';
 
-class Tweet extends React.Component {
-  constructor(props) {
-    super(props)
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; }
+
+var React = require('react');
+
+var Tweet = (function (_React$Component) {
+  function Tweet() {
+    _classCallCheck(this, Tweet);
+
+    if (_React$Component != null) {
+      _React$Component.apply(this, arguments);
+    }
   }
 
-  render() {
-     let tweet = this.props.tweet;
-     return (
-       React.DOM.li({className: "tweet" + (tweet.active ? ' active' : '')}, 
-         React.DOM.img({src: tweet.avatar, className: "avatar"}), 
-         React.DOM.blockquote(null, 
-           React.DOM.cite(null, 
-             React.DOM.a({href: "http://www.twitter.com/" + tweet.screenname}, tweet.author), 
-             React.DOM.span({className: "screen-name"}, "@", tweet.screenname)
-           ), 
-           React.DOM.span({className: "content"}, tweet.body)
-         )
-       )
-     )
-   }
-}
+  _inherits(Tweet, _React$Component);
 
-module.exports = Tweet
+  _createClass(Tweet, [{
+    key: 'render',
+    value: function render() {
+      var tweet = this.props.tweet;
+      return React.createElement(
+        'li',
+        { className: 'tweet' + (tweet.active ? ' active' : '') },
+        React.createElement('img', { src: tweet.avatar, className: 'avatar' }),
+        React.createElement(
+          'blockquote',
+          null,
+          React.createElement(
+            'cite',
+            null,
+            React.createElement(
+              'a',
+              { href: 'http://www.twitter.com/' + tweet.screenname },
+              tweet.author
+            ),
+            React.createElement(
+              'span',
+              { className: 'screen-name' },
+              '@',
+              tweet.screenname
+            )
+          ),
+          React.createElement(
+            'span',
+            { className: 'content' },
+            tweet.body
+          )
+        )
+      );
+    }
+  }]);
+
+  return Tweet;
+})(React.Component);
+
+module.exports = Tweet;
 
 },{"react":"/Users/ljin/code/react/react-twitter/node_modules/react/react.js"}],"/Users/ljin/code/react/react-twitter/components/Tweets.react.jsx":[function(require,module,exports){
-/** @jsx React.DOM */let React = require('react');
-let Tweet = require('./Tweet.react.jsx');
+'use strict';
 
-class Tweets extends React.Component {
-  constructor(props) {
-    super(props)
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; }
+
+var React = require('react');
+var Tweet = require('./Tweet.react.jsx');
+
+var Tweets = (function (_React$Component) {
+  function Tweets() {
+    _classCallCheck(this, Tweets);
+
+    if (_React$Component != null) {
+      _React$Component.apply(this, arguments);
+    }
   }
 
-  render() {
+  _inherits(Tweets, _React$Component);
 
-        // Build list items of single tweet components using map
-        var content = this.props.tweets.map(function(tweet){
-          return (
-            Tweet({key: tweet._id, tweet: tweet})
-          )
-        });
+  _createClass(Tweets, [{
+    key: 'render',
+    value: function render() {
+      // Build list items of single tweet components using map
+      var content = this.props.tweets.map(function (tweet) {
+        return React.createElement(Tweet, { key: tweet._id, tweet: tweet });
+      });
 
-        // Return ul filled with our mapped tweets
-        return (
-          React.DOM.ul({className: "tweets"}, content)
-        )
-   }
-}
+      // Return ul filled with our mapped tweets
+      return React.createElement(
+        'ul',
+        { className: 'tweets' },
+        content
+      );
+    }
+  }]);
 
-module.exports = Tweets
+  return Tweets;
+})(React.Component);
+
+module.exports = Tweets;
 
 },{"./Tweet.react.jsx":"/Users/ljin/code/react/react-twitter/components/Tweet.react.jsx","react":"/Users/ljin/code/react/react-twitter/node_modules/react/react.js"}],"/Users/ljin/code/react/react-twitter/components/TweetsApp.react.jsx":[function(require,module,exports){
-/** @jsx React.DOM */'use strict'
-let React = require('react');
-// let React = require('react');
-let Tweets = require('./Tweets.react.jsx');
-let Loader = require('./Loader.react.jsx');
-let NotificationBar = require('./NotificationBar.react.jsx');
+'use strict';
 
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
 
-class TweetsApp extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = { tweets: props.tweets,
-          count: 0,
-          page: 0,
-          paging: false,//is it in paging? if so show the loader
-          skip: 0,
-          done: false}
+var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; desc = parent = getter = undefined; _again = false; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; }
+
+var React = require('react');
+var Tweets = require('./Tweets.react.jsx');
+var Loader = require('./Loader.react.jsx');
+var NotificationBar = require('./NotificationBar.react.jsx');
+
+var TweetsApp = (function (_React$Component) {
+  function TweetsApp(props) {
+    _classCallCheck(this, TweetsApp);
+
+    _get(Object.getPrototypeOf(TweetsApp.prototype), 'constructor', this).call(this, props);
+    this.state = {
+      tweets: props.tweets,
+      count: 0,
+      page: 0,
+      paging: false, //is it in paging? if so show the loader
+      skip: 0,
+      done: false
+    };
   }
 
-  //   // we need to use the componentWillReceiveProps method to make sure that if we mount our component
-  //   // again, that it will receive the state
-    componentWillReceiveProps(newProps, oldProps) {
+  _inherits(TweetsApp, _React$Component);
+
+  _createClass(TweetsApp, [{
+    key: 'componentWillReceiveProps',
+
+    // we need to use the componentWillReceiveProps method to make sure that if we mount our component
+    // again, that it will receive the state
+    value: function componentWillReceiveProps(newProps, oldProps) {
       this.setState(this.getInitialState(newProps));
     }
+  }, {
+    key: 'componentDidMount',
 
-      // Called directly after component rendering, only on client
-    componentDidMount() {
+    // Called directly after component rendering, only on client
+    value: function componentDidMount() {
+      var self = this;
+      // Initialize socket.io
+      var socket = io.connect();
 
-        // Preserve self reference
-        var self = this;
+      // On tweet event emission...
+      socket.on('tweet', function (data) {
+        // Add a tweet to our queue
+        self.addTweet(data);
+      });
+      // Attach scroll event to the window for infinity paging
+      window.addEventListener('scroll', this.checkWindowScroll.bind(this));
+    }
+  }, {
+    key: 'addTweet',
 
-        // Initialize socket.io
-        var socket = io.connect();
+    //when receive a new tweet from socket.io, set a new state
+    value: function addTweet(tweet) {
 
-        // On tweet event emission...
-        socket.on('tweet', function (data) {
+      // Get current application state
+      var updated = this.state.tweets;
 
-          // Add a tweet to our queue
-          self.addTweet(data);
+      // Increment the unread count
+      var count = this.state.count + 1;
 
-        });
+      // Increment the skip count
+      var skip = this.state.skip + 1;
 
-        // Attach scroll event to the window for infinity paging
-        window.addEventListener('scroll', this.checkWindowScroll);
+      // Add tweet to the beginning of the tweets array
+      updated.unshift(tweet);
 
+      // Set application state
+      this.setState({ tweets: updated, count: count, skip: skip });
+    }
+  }, {
+    key: 'showNewTweets',
+
+    // Method to show the unread tweets
+    // triggered from clicking on the notification bar
+    // passed to notificationbar as props function
+    value: function showNewTweets() {
+
+      // Get current application state
+      var updated = this.state.tweets;
+      // Mark our tweets active
+      updated.forEach(function (tweet) {
+        tweet.active = true;
+      });
+
+      // Set application state (active tweets + reset unread count)
+      this.setState({ tweets: updated, count: 0 });
+    }
+  }, {
+    key: 'checkWindowScroll',
+
+    // Method to check if more tweets should be loaded, by scroll position
+    value: function checkWindowScroll() {
+
+      // Get scroll pos & window data
+      var h = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+      var s = document.body.scrollTop;
+      var scrolled = h + s > document.body.offsetHeight - 100;
+
+      // If scrolled enough, not currently paging and not complete...
+      if (scrolled && !this.state.paging && !this.state.done) {
+
+        // Set application state (Paging, Increment page)
+        this.setState({ paging: true, page: this.state.page + 1 });
+
+        // Get the next page of tweets from the server
+        this.getPage(this.state.page);
       }
+    }
+  }, {
+    key: 'getPage',
 
-      // Method to add a tweet to our timeline
-      //when receive a new tweet from socket.io, set a new state
-      addTweet(tweet) {
+    // Method to get JSON from server by page
+    value: function getPage(page) {
+      // Setup our ajax request
+      var request = new XMLHttpRequest();
+      var self = this;
 
-        // Get current application state
-        var updated = this.state.tweets;
+      request.open('GET', 'page/' + page + '/' + this.state.skip, true);
 
-        // Increment the unread count
-        var count = this.state.count + 1;
+      request.onload = function () {
+        // If everything is cool...
+        if (request.status >= 200 && request.status < 400) {
+          // Load our next page
+          self.loadPagedTweets(JSON.parse(request.responseText));
+        } else {
+          // Set application state (Not paging, paging complete)
+          self.setState({ paging: false, done: true });
+        }
+      };
+      request.send();
+    }
+  }, {
+    key: 'loadPagedTweets',
 
-        // Increment the skip count
-        var skip = this.state.skip + 1;
+    // Method to load tweets fetched from the server
+    value: function loadPagedTweets(tweets) {
+      var _this = this;
 
-        // Add tweet to the beginning of the tweets array
-        updated.unshift(tweet);
-
-        // Set application state
-        this.setState({tweets: updated, count: count, skip: skip});
-
-      }
-
-        // Method to show the unread tweets
-        // triggered from clicking on the notification bar
-        // passed to notificationbar as props function
-        showNewTweets(){
+      var self = this;
+      // If we still have tweets...
+      if (tweets.length > 0) {
+        (function () {
 
           // Get current application state
-          var updated = this.state.tweets;
-          // Mark our tweets active
-          updated.forEach(function(tweet){
-            tweet.active = true;
+          var updated = _this.state.tweets;
+
+          // Push them onto the end of the current tweets array
+          tweets.forEach(function (tweet) {
+            updated.push(tweet);
           });
 
-          // Set application state (active tweets + reset unread count)
-          this.setState({tweets: updated, count: 0});
+          // This app is so fast, I actually use a timeout for dramatic effect
+          // Otherwise you'd never see our super sexy loader svg
+          setTimeout(function () {
 
-        }
-        // Method to check if more tweets should be loaded, by scroll position
-        checkWindowScroll(){
+            // Set application state (Not paging, add tweets)
+            self.setState({ tweets: updated, paging: false });
+          }, 1000);
+        })();
+      } else {
 
-          // Get scroll pos & window data
-          var h = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
-          var s = document.body.scrollTop;
-          var scrolled = (h + s) > document.body.offsetHeight -100;
+        // Set application state (Not paging, paging complete)
+        this.setState({ done: true, paging: false });
+      }
+    }
+  }, {
+    key: 'render',
 
-          // If scrolled enough, not currently paging and not complete...
-          if(scrolled && !this.state.paging && !this.state.done) {
+    // Render the component
+    value: function render() {
+      return React.createElement(
+        'div',
+        { className: 'tweets-app' },
+        React.createElement(Tweets, { tweets: this.state.tweets }),
+        React.createElement(Loader, { paging: this.state.paging }),
+        React.createElement(NotificationBar, { count: this.state.count, onShowNewTweets: this.showNewTweets.bind(this) })
+      );
+    }
+  }]);
 
-            // Set application state (Paging, Increment page)
-            this.setState({paging: true, page: this.state.page + 1});
+  return TweetsApp;
+})(React.Component);
 
-            // Get the next page of tweets from the server
-            this.getPage(this.state.page);
-
-          }
-        }
-
-        // Method to get JSON from server by page
-        getPage(page) {
-
-          // Setup our ajax request
-          var request = new XMLHttpRequest(), self = this;
-          request.open('GET', 'page/' + page + "/" + this.state.skip, true);
-          request.onload = function() {
-
-            // If everything is cool...
-            if (request.status >= 200 && request.status < 400){
-
-              // Load our next page
-              self.loadPagedTweets(JSON.parse(request.responseText));
-
-            } else {
-
-              // Set application state (Not paging, paging complete)
-              self.setState({paging: false, done: true});
-
-            }
-          };
-
-          // Fire!
-          request.send();
-
-        }
-
-        // Method to load tweets fetched from the server
-        loadPagedTweets(tweets){
-
-          // So meta lol
-          var self = this;
-
-          // If we still have tweets...
-          if(tweets.length > 0) {
-
-            // Get current application state
-            var updated = this.state.tweets;
-
-            // Push them onto the end of the current tweets array
-            tweets.forEach(function(tweet){
-              updated.push(tweet);
-            });
-
-            // This app is so fast, I actually use a timeout for dramatic effect
-            // Otherwise you'd never see our super sexy loader svg
-            setTimeout(function(){
-
-              // Set application state (Not paging, add tweets)
-              self.setState({tweets: updated, paging: false});
-
-            }, 1000);
-
-          } else {
-
-            // Set application state (Not paging, paging complete)
-            this.setState({done: true, paging: false});
-
-          }
-        }
-
-       // Render the component
-        render() {
-          return (
-            React.DOM.div({className: "tweets-app"}, 
-              Tweets({tweets: this.state.tweets}), 
-              Loader({paging: this.state.paging}), 
-              NotificationBar({count: this.state.count, onShowNewTweets: this.showNewTweets})
-            )
-          )
-        }
-
-
-}
-// // Export the TweetsApp component
-// let TweetsApp = React.createClass({
-//   // Set the initial component state
-//   // getInitialState method is only called before the first mount of our component
-//   getInitialState: function(props){
-//
-//     props = props || this.props;
-//
-//     // Set initial application state using props
-//     return {
-//       tweets: props.tweets,
-//       count: 0,
-//       page: 0,
-//       paging: false,//is it in paging? if so show the loader
-//       skip: 0,
-//       done: false
-//     };
-//
-//   },
-//
-//   // we need to use the componentWillReceiveProps method to make sure that if we mount our component
-//   // again, that it will receive the state
-//   componentWillReceiveProps: function(newProps, oldProps){
-//     this.setState(this.getInitialState(newProps));
-//   },
-//
-//   // Called directly after component rendering, only on client
-//   componentDidMount: function(){
-//
-//     // Preserve self reference
-//     var self = this;
-//
-//     // Initialize socket.io
-//     var socket = io.connect();
-//
-//     // On tweet event emission...
-//     socket.on('tweet', function (data) {
-//
-//       // Add a tweet to our queue
-//       self.addTweet(data);
-//
-//     });
-//
-//     // Attach scroll event to the window for infinity paging
-//     window.addEventListener('scroll', this.checkWindowScroll);
-//
-//   },
-//
-//   // Method to add a tweet to our timeline
-//   //when receive a new tweet from socket.io, set a new state
-//   addTweet: function(tweet){
-//
-//     // Get current application state
-//     var updated = this.state.tweets;
-//
-//     // Increment the unread count
-//     var count = this.state.count + 1;
-//
-//     // Increment the skip count
-//     var skip = this.state.skip + 1;
-//
-//     // Add tweet to the beginning of the tweets array
-//     updated.unshift(tweet);
-//
-//     // Set application state
-//     this.setState({tweets: updated, count: count, skip: skip});
-//
-//   },
-//
-//   // Method to show the unread tweets
-//   // triggered from clicking on the notification bar
-//   // passed to notificationbar as props function
-//   showNewTweets: function(){
-//
-//     // Get current application state
-//     var updated = this.state.tweets;
-//     // Mark our tweets active
-//     updated.forEach(function(tweet){
-//       tweet.active = true;
-//     });
-//
-//     // Set application state (active tweets + reset unread count)
-//     this.setState({tweets: updated, count: 0});
-//
-//   },
-//
-//   // Method to check if more tweets should be loaded, by scroll position
-//   checkWindowScroll: function(){
-//
-//     // Get scroll pos & window data
-//     var h = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
-//     var s = document.body.scrollTop;
-//     var scrolled = (h + s) > document.body.offsetHeight -100;
-//
-//     // If scrolled enough, not currently paging and not complete...
-//     if(scrolled && !this.state.paging && !this.state.done) {
-//
-//       // Set application state (Paging, Increment page)
-//       this.setState({paging: true, page: this.state.page + 1});
-//
-//       // Get the next page of tweets from the server
-//       this.getPage(this.state.page);
-//
-//     }
-//   },
-//
-//   // Method to get JSON from server by page
-//   getPage: function(page){
-//
-//     // Setup our ajax request
-//     var request = new XMLHttpRequest(), self = this;
-//     request.open('GET', 'page/' + page + "/" + this.state.skip, true);
-//     request.onload = function() {
-//
-//       // If everything is cool...
-//       if (request.status >= 200 && request.status < 400){
-//
-//         // Load our next page
-//         self.loadPagedTweets(JSON.parse(request.responseText));
-//
-//       } else {
-//
-//         // Set application state (Not paging, paging complete)
-//         self.setState({paging: false, done: true});
-//
-//       }
-//     };
-//
-//     // Fire!
-//     request.send();
-//
-//   },
-//
-//   // Method to load tweets fetched from the server
-//   loadPagedTweets: function(tweets){
-//
-//     // So meta lol
-//     var self = this;
-//
-//     // If we still have tweets...
-//     if(tweets.length > 0) {
-//
-//       // Get current application state
-//       var updated = this.state.tweets;
-//
-//       // Push them onto the end of the current tweets array
-//       tweets.forEach(function(tweet){
-//         updated.push(tweet);
-//       });
-//
-//       // This app is so fast, I actually use a timeout for dramatic effect
-//       // Otherwise you'd never see our super sexy loader svg
-//       setTimeout(function(){
-//
-//         // Set application state (Not paging, add tweets)
-//         self.setState({tweets: updated, paging: false});
-//
-//       }, 1000);
-//
-//     } else {
-//
-//       // Set application state (Not paging, paging complete)
-//       this.setState({done: true, paging: false});
-//
-//     }
-//   },
-//
-//   // Render the component
-//   render: function(){
-//     return (
-//       <div className="tweets-app">
-//         <Tweets tweets={this.state.tweets} />
-//         <Loader paging={this.state.paging}/>
-//         <NotificationBar count={this.state.count} onShowNewTweets={this.showNewTweets}/>
-//       </div>
-//     )
-//   }
-//
-// });
-module.exports = TweetsApp
+module.exports = TweetsApp;
 
 },{"./Loader.react.jsx":"/Users/ljin/code/react/react-twitter/components/Loader.react.jsx","./NotificationBar.react.jsx":"/Users/ljin/code/react/react-twitter/components/NotificationBar.react.jsx","./Tweets.react.jsx":"/Users/ljin/code/react/react-twitter/components/Tweets.react.jsx","react":"/Users/ljin/code/react/react-twitter/node_modules/react/react.js"}],"/Users/ljin/code/react/react-twitter/node_modules/react/lib/AutoFocusMixin.js":[function(require,module,exports){
 /**
